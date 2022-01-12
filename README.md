@@ -2,5 +2,8 @@
 
 Update:
 
-Finished Step 3:
-    Write a function that loops through the array and displays each book on the page. You can display them in some sort of table, or each on their own "card".
+Finished steps 1 to 6.
+
+Possible future revisions:
+- Redo the styling of the page to add more colors.
+- Change the read/not read status button into a sliding toggle switch.
