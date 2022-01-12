@@ -1,5 +1,5 @@
 //----------------------------------SELECTORS----------------------------------------
-const newBook_button = document.getElementById('new-book');
+const newBook_button = document.getElementById('modal-new-book');
 const bookShelf = document.querySelector('.book-shelf');
 
 //----------------------------------INITIALIZATIONS----------------------------------
@@ -14,10 +14,14 @@ function Book(author,title,pages,read) {
 
 // author, title, number of pages, read
 function addBookToLibrary() {
-    let title = prompt("What is the title of the book?");
-    let author = prompt("Who is the author?");
-    let pages = Number(prompt("How many pages is the book?"));
-    let read = prompt("Have you read the book?", "Yes or No");
+    // let title = prompt("What is the title of the book?");
+    // let author = prompt("Who is the author?");
+    // let pages = Number(prompt("How many pages is the book?"));
+    // let read = prompt("Have you read the book?", "Yes or No");
+    let title = document.getElementById('book-title').value;
+    let author = document.getElementById('book-author').value;
+    let pages = document.getElementById('book-pages').value;
+    let read = document.getElementById('book-read').value;
 
     let newBook = new Book(author,title,pages,read);
     myLibrary.push(newBook);
@@ -63,4 +67,22 @@ function createCards(){
             bookCard.appendChild(remove_button);
        // }
     }
+}
+
+// MODAL
+
+let modalBtn = document.getElementById("modal-btn")
+let modal = document.querySelector(".modal")
+let closeBtn = document.querySelector(".close-btn")
+
+modalBtn.onclick = function(){
+  modal.style.display = "block"
+}
+closeBtn.onclick = function(){
+  modal.style.display = "none"
+}
+window.onclick = function(e){
+  if(e.target == modal){
+    modal.style.display = "none"
+  }
 }
