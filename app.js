@@ -78,6 +78,15 @@ function createCards(){
                     read_button.textContent = 'Not Read';
                     read_button.style.backgroundColor = 'red';
             }
+            read_button.addEventListener('click', () => {
+                if (myLibrary[i].read === "Yes"){
+                    myLibrary[i].read = "No";
+                    createCards();
+                }else if (myLibrary[i].read === "No"){
+                    myLibrary[i].read = "Yes";
+                    createCards();
+                }
+            });
             bookCard.appendChild(read_button);
     
             let remove_button = document.createElement('button');
