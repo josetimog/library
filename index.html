@@ -21,14 +21,11 @@
         </div>
 
         <!-- MODAL -->
-        <button id="modal-btn"> click me, I make a modal</button>
         <div class='modal'>
 
             <div class='modal-content'>
                 <span class='close-btn'>&times;</span>
                 <h1>Add A New Book</h1>
-                <form>
-                    <fieldset>
 
                         <label for='book-title'>Title:</label><br>
                         <input type='text' id='book-title' name='book-title'><br><br>
@@ -39,15 +36,12 @@
                         <label for='book-pages'>Pages:</label><br>
                         <input type='text' id='book-pages' name='book-pages'><br><br>
 
-                        <label for='book-read'>I have read this book:</label>
-                        <input type='checkbox' id='book-read' name='book-read' value='true'>
-                        <br>
-                        <br>
+                        <label for='book-read'>Read? Yes/No:</label><br>
+                        <input type='text' id='book-read' name='book-read'><br><br>
 
-                        <input type="submit" value="Submit">
 
-                    </fieldset>
-                </form>
+                        <button id='submit'>Submit</button>
+
             </div>
         </div>
 

@@ -1,6 +1,10 @@
 //----------------------------------SELECTORS----------------------------------------
 const newBook_button = document.getElementById('modal-new-book');
 const bookShelf = document.querySelector('.book-shelf');
+const submit_button = document.getElementById('submit');
+let modal = document.querySelector(".modal");
+let closeBtn = document.querySelector(".close-btn");
+let removeBook = document.querySelectorAll('.remove');
 
 //----------------------------------INITIALIZATIONS----------------------------------
 let myLibrary = [];
@@ -14,10 +18,6 @@ function Book(author,title,pages,read) {
 
 // author, title, number of pages, read
 function addBookToLibrary() {
-    // let title = prompt("What is the title of the book?");
-    // let author = prompt("Who is the author?");
-    // let pages = Number(prompt("How many pages is the book?"));
-    // let read = prompt("Have you read the book?", "Yes or No");
     let title = document.getElementById('book-title').value;
     let author = document.getElementById('book-author').value;
     let pages = document.getElementById('book-pages').value;
@@ -30,6 +30,16 @@ function addBookToLibrary() {
 }
 
 newBook_button.addEventListener('click', () => {
+    document.getElementById('book-title').value = null;
+    document.getElementById('book-author').value = null;
+    document.getElementById('book-pages').value = null;
+    document.getElementById('book-read').value = null;
+
+    modal.style.display = 'block';
+})
+
+submit_button.addEventListener('click', () => {
+    modal.style.display = 'none';
     addBookToLibrary();
 })
 
@@ -41,9 +51,9 @@ function createCards(){
     }
 
     for( let i = 0; i < myLibrary.length; i++) {
-       // for(let prop in myLibrary[i]){
             let bookCard = document.createElement('div');
             bookCard.classList.add('card');
+            bookCard.setAttribute('data-location', `book-${i}`)
             bookShelf.appendChild(bookCard);
     
             let title_p = document.createElement('p');
@@ -59,28 +69,35 @@ function createCards(){
             bookCard.appendChild(pages_p);
     
             let read_button = document.createElement('button');
-            read_button.textContent = 'Read';
+            switch(myLibrary[i].read){
+                case 'Yes':
+                    read_button.textContent = 'Read';
+                    read_button.style.backgroundColor = 'green';
+                    break;
+                case "No":
+                    read_button.textContent = 'Not Read';
+                    read_button.style.backgroundColor = 'red';
+            }
             bookCard.appendChild(read_button);
     
             let remove_button = document.createElement('button');
             remove_button.textContent = 'Remove';
+            remove_button.classList.add('remove');
+            remove_button.addEventListener('click', () => {
+                let filtered = myLibrary.splice(i,1);
+                createCards();
+            });
             bookCard.appendChild(remove_button);
-       // }
     }
 }
 
-// MODAL
+//----------------------------------- MODAL ---------------------------------------------
 
-let modalBtn = document.getElementById("modal-btn")
-let modal = document.querySelector(".modal")
-let closeBtn = document.querySelector(".close-btn")
+closeBtn.addEventListener('click', () =>{
+  modal.style.display = "none";
+});
 
-modalBtn.onclick = function(){
-  modal.style.display = "block"
-}
-closeBtn.onclick = function(){
-  modal.style.display = "none"
-}
+//Hides the modal if user clicked outside the modal
 window.onclick = function(e){
   if(e.target == modal){
     modal.style.display = "none"
